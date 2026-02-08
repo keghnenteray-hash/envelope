@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: envelope
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn Envelope.wsgi --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        scope: run
+      - key: DATABASE_URL
+        scope: run
+      - key: PYTHONUNBUFFERED
+        value: true
